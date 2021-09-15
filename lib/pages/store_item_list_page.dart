@@ -7,14 +7,6 @@ class StoreItemListPage extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
 
-  String _validate(String value) {
-    if (value.isEmpty) {
-      return "Field cannot be empty";
-    }
-
-    return 'null';
-  }
-
   void _saveStoreItem() {}
 
   void _clearTextBoxes() {
@@ -35,17 +27,32 @@ class StoreItemListPage extends StatelessWidget {
         child: Column(children: [
           TextFormField(
             controller: _nameController,
-            // validator: _validate(),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return "Field cannot be empty";
+              }
+              return 'null';
+            },
             decoration: InputDecoration(hintText: "Enter store item"),
           ),
           TextFormField(
             controller: _priceController,
-            // validator: _validate,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return "Field cannot be empty";
+              }
+              return 'null';
+            },
             decoration: InputDecoration(hintText: "Enter price"),
           ),
           TextFormField(
             controller: _quantityController,
-            // validator: _validate,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return "Field cannot be empty";
+              }
+              return 'null';
+            },
             decoration: InputDecoration(hintText: "Enter quantity"),
           ),
           ElevatedButton(

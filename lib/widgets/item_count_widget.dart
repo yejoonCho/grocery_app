@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ItemCountWidget extends StatelessWidget {
-  final int count;
+  int? count;
 
   ItemCountWidget({this.count});
 
