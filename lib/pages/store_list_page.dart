@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/pages/add_store_page.dart';
+import 'package:grocery_app/view_model/add_store_view_model.dart';
+import 'package:provider/provider.dart';
 
 class StoreListPage extends StatefulWidget {
   @override
@@ -15,7 +17,11 @@ class _StoreListPage extends State<StoreListPage> {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => AddStorePage(), fullscreenDialog: true),
+          builder: (context) => ChangeNotifierProvider(
+                create: (context) => AddStoreViewModel(),
+                child: AddStorePage(),
+              ),
+          fullscreenDialog: true),
     );
   }
 

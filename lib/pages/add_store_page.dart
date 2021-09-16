@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/view_model/add_store_view_model.dart';
+import 'package:provider/provider.dart';
 
 class AddStorePage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
-  AddStoreViewModel? _addStoreVM = AddStoreViewModel();
+  AddStoreViewModel? _addStoreVM;
 
-  void _saveStore(BuildContext context) {
+  void _saveStore(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
-      _addStoreVM!.saveStore();
+      final isSaved = await _addStoreVM!.saveStore();
+      if (isSaved) {
+        Navigator.pop(context);
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    _addStoreVM = Provider.of<AddStoreViewModel>(context);
+
     return Scaffold(
       appBar: AppBar(title: Text("Add Store")),
       body: Padding(
@@ -44,7 +50,9 @@ class AddStorePage extends StatelessWidget {
                 onPressed: () {
                   _saveStore(context);
                 },
-              )
+              ),
+              Spacer(),
+              Text(_addStoreVM!.message)
             ],
           ),
         ),
